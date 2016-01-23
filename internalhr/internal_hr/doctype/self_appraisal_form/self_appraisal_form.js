@@ -5,7 +5,7 @@ cur_frm.cscript.onload = function(doc, dt, dn) {
   var fiscal_year=doc.fiscal_year
   var res = fiscal_year.split("-");
   doc.appraisal_period_from = res[0]+"-06-01";
-  doc.appraisal_period_to = res[1]+"-05-31";
+  doc.appraisal_period_to = res[1]+"-05-31";	
 }
 
 cur_frm.add_fetch('employee_id', 'date_of_joining', 'date_of_joining');

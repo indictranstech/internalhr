@@ -115,3 +115,5 @@ doc_events = {
 		# "on_trash": "method"
 	}
 }
+
+fixtures=["Custom Field","Property Setter"]
