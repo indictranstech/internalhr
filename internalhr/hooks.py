@@ -110,7 +110,7 @@ app_license = "MIT"
 doc_events = {
 	"Leave Application": {
 		"on_update": "internalhr.custom_py_method.notify_leave_Manager",
-
+		# "on_update": "internalhr.custom_py_method.notify_leave_approv",	
 		# "on_cancel": "method",
 		# "on_trash": "method"
 	}
