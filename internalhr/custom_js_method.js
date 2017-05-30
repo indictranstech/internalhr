@@ -12,12 +12,12 @@ frappe.ui.form.on("Attendance","out_time",function(frm){
 	  var cl=doc.earnings ||[];
 
 	  for(var i = 0; i < cl.length; i++){
-	      if(cl[i].e_type=='Basic') cl[i].modified_value = gross*0.38;
-	      if(cl[i].e_type=='House Rent Allowance') cl[i].modified_value = gross*0.266;
-	      if(cl[i].e_type=='Medical Allowance') cl[i].modified_value = gross*0.076;
-	      if(cl[i].e_type=='Convayance Allowance') cl[i].modified_value=gross*0.076;
-	      if(cl[i].e_type=='Lunch Allowance') cl[i].modified_value=gross*0.06;
-	      if(cl[i].e_type=='Others') cl[i].modified_value = gross*0.142;
+	      if(cl[i].salary_component=='Basic') cl[i].amount = gross*0.38;
+	      if(cl[i].salary_component=='House Rent Allowance') cl[i].amount = gross*0.266;
+	      if(cl[i].salary_component=='Medical Allowance') cl[i].amount = gross*0.076;
+	      if(cl[i].salary_component=='Convayance Allowance') cl[i].amount=gross*0.076;
+	      if(cl[i].salary_component=='Lunch Allowance') cl[i].amount=gross*0.06;
+	      if(cl[i].salary_component=='Others') cl[i].amount = gross*0.142;
 	  }
 	  refresh_field('earnings');
 
@@ -26,9 +26,9 @@ frappe.ui.form.on("Attendance","out_time",function(frm){
 	  // var cll = getchildren('Salary Structure Deduction', doc.name, 'deduction_details', doc.doctype);
 	  for(var i = 0; i < cll.length; i++){
 
-	      if(cll[i].d_type=='Professional Tax'){
-	        if(gross<15000) cll[i].d_modified_amt =175;
-	        else cll[i].d_modified_amt = 200;
+	      if(cll[i].salary_component=='Professional Tax'){
+	        if(gross<15000) cll[i].amount =175;
+	        else cll[i].amount = 200;
 	      } 
 	  }
 	  refresh_field('deductions');
@@ -42,32 +42,32 @@ frappe.ui.form.on("Salary Structure","ctc",function(frm){
 	      
 	      if(gross>=7000 && gross<=10000)
 	      {
-		  	if(cl[i].e_type=='Basic') cl[i].modified_value = gross*0.8;
-		    if(cl[i].e_type=='House Rent Allowance') Math.round(cl[i].modified_value = gross-(gross*0.8));
+		  	if(cl[i].salary_component=='Basic') cl[i].amount = gross*0.8;
+		    if(cl[i].salary_component=='House Rent Allowance') Math.round(cl[i].amount = gross-(gross*0.8));
 		  }
 		  else if(gross>=10000 && gross<=15000)
 		  {
-		  	if(cl[i].e_type=='Basic') cl[i].modified_value = 9000;
-		  	if(cl[i].e_type=='Convayance Allowance') Math.round(cl[i].modified_value=(gross-9000)/2);
-		    if(cl[i].e_type=='House Rent Allowance') Math.round(cl[i].modified_value =(gross-9000)/2);
+		  	if(cl[i].salary_component=='Basic') cl[i].amount = 9000;
+		  	if(cl[i].salary_component=='Convayance Allowance') Math.round(cl[i].amount=(gross-9000)/2);
+		    if(cl[i].salary_component=='House Rent Allowance') Math.round(cl[i].amount =(gross-9000)/2);
 		  }
 		  else if(gross>15000 && gross<=25000)
 		  {
-		  	if(cl[i].e_type=='Basic') cl[i].modified_value = 9500;
-		  	if(cl[i].e_type=='Convayance Allowance') Math.round(cl[i].modified_value=(gross-9500)/3);
-		    if(cl[i].e_type=='House Rent Allowance') Math.round(cl[i].modified_value = (gross-9500)/3);
-		    if(cl[i].e_type=='Medical Allowance') Math.round(cl[i].modified_value = (gross-9500)/3);
+		  	if(cl[i].salary_component=='Basic') cl[i].amount = 9500;
+		  	if(cl[i].salary_component=='Convayance Allowance') Math.round(cl[i].amount=(gross-9500)/3);
+		    if(cl[i].salary_component=='House Rent Allowance') Math.round(cl[i].amount = (gross-9500)/3);
+		    if(cl[i].salary_component=='Medical Allowance') Math.round(cl[i].amount = (gross-9500)/3);
 		  }
 		  else
 		  {
-		  	if(cl[i].e_type=='Basic') cl[i].modified_value = Math.round(gross*0.4);
-		  	if(cl[i].e_type=='House Rent Allowance') cl[i].modified_value = Math.round((gross*0.4)*30/100);
-		  	if(cl[i].e_type=='Convayance Allowance') cl[i].modified_value=Math.round((gross*0.4)*25/100);
-		    if(cl[i].e_type=='Medical Allowance')cl[i].modified_value = Math.round((gross*0.4)*20/100);
-		    if(cl[i].e_type=='CCA') cl[i].modified_value = Math.round((gross*0.4)*20/100);
-		    if(cl[i].e_type=='Welfare Allowance') cl[i].modified_value = Math.round((gross*0.4)*20/100);
-		    if(cl[i].e_type=='Education Allowance') cl[i].modified_value = Math.round((gross*0.4)*20/100);
-		    if(cl[i].e_type=='Entertainment Allowance') cl[i].modified_value = Math.round((gross*0.4)*15/100);
+		  	if(cl[i].salary_component=='Basic') cl[i].amount = Math.round(gross*0.4);
+		  	if(cl[i].salary_component=='House Rent Allowance') cl[i].amount = Math.round((gross*0.4)*30/100);
+		  	if(cl[i].salary_component=='Convayance Allowance') cl[i].amount=Math.round((gross*0.4)*25/100);
+		    if(cl[i].salary_component=='Medical Allowance')cl[i].amount = Math.round((gross*0.4)*20/100);
+		    if(cl[i].salary_component=='CCA') cl[i].amount = Math.round((gross*0.4)*20/100);
+		    if(cl[i].salary_component=='Welfare Allowance') cl[i].amount = Math.round((gross*0.4)*20/100);
+		    if(cl[i].salary_component=='Education Allowance') cl[i].amount = Math.round((gross*0.4)*20/100);
+		    if(cl[i].salary_component=='Entertainment Allowance') cl[i].amount = Math.round((gross*0.4)*15/100);
 		  }
 	  }
 	  refresh_field('earnings');
@@ -78,60 +78,60 @@ frappe.ui.form.on("Salary Structure","ctc",function(frm){
 	  for(var i = 0; i < cll.length; i++){
 	  	if(doc.employee_name=='Aniruddha Satam' || doc.employee_name=='Kalpita Sanghavi')
 	  	{
-			if(cll[i].d_type=='Provident Fund')cll[i].d_modified_amt=1800;
+			if(cll[i].salary_component=='Provident Fund')cll[i].amount=1800;
 		}
 		else
 		{
 			if (gross>=7000 && gross<=10000)
 		  	{
-		  		if(cll[i].d_type=='Provident Fund')
-		  			cll[i].d_modified_amt=Math.round((gross*0.8)*0.12);
+		  		if(cll[i].salary_component=='Provident Fund')
+		  			cll[i].amount=Math.round((gross*0.8)*0.12);
 		  	}
 		  	else if (gross>=10000 && gross<=15000)
 		  	{
-		  		if(cll[i].d_type=='Provident Fund')
-		  			cll[i].d_modified_amt=Math.round(9000*0.12);
+		  		if(cll[i].salary_component=='Provident Fund')
+		  			cll[i].amount=Math.round(9000*0.12);
 		  	}
 		  	else if (gross>15000 && gross<=25000)
 		  	{
-		  		if(cll[i].d_type=='Provident Fund')cll[i].d_modified_amt=Math.round(9500*0.12);
+		  		if(cll[i].salary_component=='Provident Fund')cll[i].amount=Math.round(9500*0.12);
 		  	}
 		  	else
 		  	{
-		  		if(cll[i].d_type=='Provident Fund')
+		  		if(cll[i].salary_component=='Provident Fund')
 		  		{
-		  				(cll[i].d_modified_amt)=Math.round((gross*0.4)*0.12);
+		  				(cll[i].amount)=Math.round((gross*0.4)*0.12);
 		  		}
 		  	}
 		}
 	  	/*
 		else
-			if(cll[i].d_type=='Provident Fund')cll[i].d_modified_amt=gross*0.4*12/100;*/
+			if(cll[i].salary_component=='Provident Fund')cll[i].amount=gross*0.4*12/100;*/
 	    if(doc.gender=='Female' && gross>10000)
 	    {
-	    	if(cll[i].d_type=='Professional Tax'){
-	    	cll[i].d_modified_amt = 200;
+	    	if(cll[i].salary_component=='Professional Tax'){
+	    	cll[i].amount = 200;
 	    }
 	    }
 	    else
 	    {
 		    if(gross>7000) 
 		    {
-		    	if(cll[i].d_type=='Professional Tax'){
-		        	if(gross<15000) cll[i].d_modified_amt =175;
-		        	else cll[i].d_modified_amt = 200;
+		    	if(cll[i].salary_component=='Professional Tax'){
+		        	if(gross<15000) cll[i].amount =175;
+		        	else cll[i].amount = 200;
 		    	}
 		    }
 	     }
-	  /*    if(cll[i].d_type=='ESIC')
-	        cll[i].d_modified_amt=gross*0.0475;*/
+	  /*    if(cll[i].salary_component=='ESIC')
+	        cll[i].amount=gross*0.0475;*/
 	        /*if(gross<7000) */
 	        	/*prof_tax=cl[i]*0.1336;
 	        	console.log(prof_tax)*/
 	        	/*esi=gross*0.0475*/
-	        	/*cll[i].d_modified_amt =prof_tax;*/
-	        	/*cll[i].d_modified_amt =esi;*/
-	        /*else cll[i].d_modified_amt = 200;*/
+	        	/*cll[i].amount =prof_tax;*/
+	        	/*cll[i].amount =esi;*/
+	        /*else cll[i].amount = 200;*/
 	      
 	  }
 	  refresh_field('deductions');
